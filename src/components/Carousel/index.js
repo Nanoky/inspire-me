@@ -13,7 +13,7 @@ export const ItemsCarousel = ({items, nb_displayed, ItemComponent}) => {
     }
 
     return (
-        <Container>
+        <Container fluid>
             <Stack direction="horizontal">
                 <Button 
                     onClick={() => {

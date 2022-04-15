@@ -15,19 +15,20 @@ function App() {
 
   const [galleries, setGalleries] = useState([]);
   const updateMenu = false;
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getGalleryList().then((data) => {
-      log(data);
       setGalleries(data);
+      setIsLoading(false);
     });
   }, [updateMenu]);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="galleries" element={<GalleriesPage menus={galleries} />} />
-        <Route path="gallery/:galleryId" element={<GalleryPage menus={galleries} />} />
+        <Route path="galleries" element={<GalleriesPage menuLoading={isLoading} menus={galleries} />} />
+        <Route path="gallery/:galleryId" element={<GalleryPage menuLoading={isLoading} menus={galleries} />} />
         <Route path='*' element={<Navigate to={"/galleries"} replace />} />
       </Routes>
     </BrowserRouter>

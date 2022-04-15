@@ -5,7 +5,7 @@ import { ItemsCarousel } from "../Carousel";
 
 export const Menu = ({ menus }) => {
     return (
-        <Container>
+        <Container fluid>
             <Row className="justify-content-center">
                 <ItemsCarousel items={menus} nb_displayed={5} ItemComponent={MenuItem} />
             </Row>
