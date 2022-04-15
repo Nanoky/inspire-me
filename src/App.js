@@ -1,24 +1,55 @@
-import logo from './logo.svg';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { GalleryPage } from './pages/Gallery';
+
 import './App.css';
+import { log, setDebug } from './helpers/logger';
+import { GalleriesPage } from './pages/Galleries/index';
+import { getGalleryList } from './services';
+import { useEffect, useState } from 'react';
+
+setDebug(true);
 
 function App() {
+
+  const [galleries, setGalleries] = useState([]);
+
+  const menus = [
+    {
+      name: "Mountain",
+      route: "/mountain"
+    },
+    {
+      name: "Beaches",
+      route: "/beach"
+    },
+    {
+      name: "Birds",
+      route: "/bird"
+    },
+    {
+      name: "Food",
+      route: "/food"
+    }
+  ];
+  const updateMenu = false;
+
+  useEffect(() => {
+    getGalleryList().then((data) => {
+      log(data);
+      setGalleries(data);
+    });
+  }, [updateMenu]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="galleries" element={<GalleriesPage menus={galleries} />} />
+        <Route path="gallery/:galleryId" element={<GalleryPage menus={menus} />} />
+        <Route path='*' element={<Navigate to={"/galleries"} replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
