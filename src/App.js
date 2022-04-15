@@ -14,25 +14,6 @@ setDebug(true);
 function App() {
 
   const [galleries, setGalleries] = useState([]);
-
-  const menus = [
-    {
-      name: "Mountain",
-      route: "/mountain"
-    },
-    {
-      name: "Beaches",
-      route: "/beach"
-    },
-    {
-      name: "Birds",
-      route: "/bird"
-    },
-    {
-      name: "Food",
-      route: "/food"
-    }
-  ];
   const updateMenu = false;
 
   useEffect(() => {
@@ -46,7 +27,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="galleries" element={<GalleriesPage menus={galleries} />} />
-        <Route path="gallery/:galleryId" element={<GalleryPage menus={menus} />} />
+        <Route path="gallery/:galleryId" element={<GalleryPage menus={galleries} />} />
         <Route path='*' element={<Navigate to={"/galleries"} replace />} />
       </Routes>
     </BrowserRouter>
