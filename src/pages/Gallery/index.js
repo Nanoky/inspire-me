@@ -1,54 +1,11 @@
 import { useEffect, useState } from "react"
-import { Container, Stack } from "react-bootstrap"
+import { Container, Row, Spinner, Stack } from "react-bootstrap"
 import { useParams } from "react-router"
 import { Gallery } from "../../components/Gallery"
-import { Menu } from "../../components/Menus"
-import { Searchbar } from "../../components/Searchbar"
-import { Title } from "../../components/Title"
-import { getGalleryList, getPhotoList } from "../../services"
+import { getPhotoList } from "../../services"
 
 
-export const GalleryPage = ({menus}) => {
-    const reloadGalleryList = false;
-    
-    const images = [
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-        {
-            src: "https://cdn.unenvironment.org/2022-03/field-ge4d2466da_1920.jpg"
-        },
-    ];
+export const GalleryPage = () => {
     const [photos, setPhotos] = useState([]);
     const params = useParams();
     const [activeGallery, setActiveGallery] = useState(0); 
@@ -63,12 +20,7 @@ export const GalleryPage = ({menus}) => {
     }, [params.galleryId]);
     return (
         <Container>
-            <Stack gap={4} className="mt-5">
-                <Title />
-                <Searchbar />
-                <Menu menus={menus} />
-                <Gallery images={photos} />
-            </Stack>
+             <Gallery images={photos} />
         </Container>
     )
 }

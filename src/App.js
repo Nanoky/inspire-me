@@ -8,6 +8,10 @@ import { log, setDebug } from './helpers/logger';
 import { GalleriesPage } from './pages/Galleries/index';
 import { getGalleryList } from './services';
 import { useEffect, useState } from 'react';
+import { Title } from './components/Title';
+import { Container, Row, Spinner, Stack } from 'react-bootstrap';
+import { Menu } from './components/Menus';
+import { Searchbar } from './components/Searchbar';
 
 setDebug(true);
 
@@ -26,9 +30,25 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Container fluid className='mb-5'>
+        <Stack gap={4} className="mt-5">
+          <Title />
+          <Searchbar />
+          {
+            (isLoading) ? (
+              <Row className="justify-content-center">
+                <Spinner animation="border" />
+              </Row>
+            ) : (
+              <Menu menus={galleries} />
+            )
+          }
+
+        </Stack>
+      </Container>
       <Routes>
-        <Route path="galleries" element={<GalleriesPage menuLoading={isLoading} menus={galleries} />} />
-        <Route path="gallery/:galleryId" element={<GalleryPage menuLoading={isLoading} menus={galleries} />} />
+        <Route path="galleries" element={<GalleriesPage />} />
+        <Route path="gallery/:galleryId" element={<GalleryPage />} />
         <Route path='*' element={<Navigate to={"/galleries"} replace />} />
       </Routes>
     </BrowserRouter>
