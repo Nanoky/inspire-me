@@ -1,4 +1,4 @@
-import { Pagination } from "react-bootstrap";
+import { Container, Pagination } from "react-bootstrap";
 
 export const Paginator = ({nb_page, active, changePage}) => {
 
@@ -39,10 +39,10 @@ export const Paginator = ({nb_page, active, changePage}) => {
     );
 
     return (
-        <div>
-            <Pagination>
+        <Container>
+            <Pagination className="justify-content-center">
                 {items}
             </Pagination>
-        </div>
+        </Container>
     )
 }

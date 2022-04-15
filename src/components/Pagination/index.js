@@ -1,6 +1,5 @@
 import { useState } from "react"
-import { Container, Row } from "react-bootstrap"
-import { log } from "../../helpers/logger";
+import { Col, Container, Row } from "react-bootstrap"
 import { Paginator } from "../Paginator";
 
 export const ItemsPagination = ({ items, nb_item_page, ItemComponent, nb_item_row, ...props }) => {
@@ -17,12 +16,12 @@ export const ItemsPagination = ({ items, nb_item_page, ItemComponent, nb_item_ro
         <Container>
             <Row className={`row-cols-${(nb_item_row) ? nb_item_row : 4} g-3`}>
                 {
-                    displayed_items.map((item) => (
-                        <ItemComponent item={item} {...props} />
+                    displayed_items.map((item, index) => (
+                        <ItemComponent key={index} item={item} {...props} />
                     ))
                 }
             </Row>
-            <Row className="mt-4">
+            <Row className="mt-4 justify-content-center">
                 <Paginator nb_page={nb_page} active={current_page} changePage={setCurrentPage} />
             </Row>
         </Container>

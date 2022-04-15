@@ -12,6 +12,7 @@ import { Title } from './components/Title';
 import { Container, Row, Spinner, Stack } from 'react-bootstrap';
 import { Menu } from './components/Menus';
 import { Searchbar } from './components/Searchbar';
+import { Loader } from './components/loader';
 
 setDebug(true);
 
@@ -36,9 +37,7 @@ function App() {
           <Searchbar />
           {
             (isLoading) ? (
-              <Row className="justify-content-center">
-                <Spinner animation="border" />
-              </Row>
+              <Loader />
             ) : (
               <Menu menus={galleries} />
             )

@@ -10,17 +10,19 @@ export const GalleryPage = () => {
     const params = useParams();
     const [activeGallery, setActiveGallery] = useState(0); 
     const [title, setTitle] = useState("Gallery");
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         if (params) {
             getPhotoList(params.galleryId).then((data) => {
                 setPhotos(data);
+                setIsLoading(false);
             });
         }
     }, [params.galleryId]);
     return (
         <Container>
-             <Gallery images={photos} />
+             <Gallery dataLoading={isLoading} images={photos} />
         </Container>
     )
 }
