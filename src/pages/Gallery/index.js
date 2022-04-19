@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react"
-import { Container, Row, Spinner, Stack } from "react-bootstrap"
+import { Container } from "react-bootstrap"
 import { useParams } from "react-router"
 import { Gallery } from "../../components/Gallery"
 import { getPhotoList } from "../../services"
 
 
-export const GalleryPage = () => {
+export const GalleryPage = ({ categories }) => {
     const [photos, setPhotos] = useState([]);
     const params = useParams();
-    const [activeGallery, setActiveGallery] = useState(0); 
-    const [title, setTitle] = useState("Gallery");
+    const [title, setTitle] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -20,9 +19,19 @@ export const GalleryPage = () => {
             });
         }
     }, [params.galleryId]);
+
+    useEffect(() => {
+        if (categories.length > 0 && params) {
+            setTitle(categories[params.index].name);
+        }
+    })
     return (
         <Container>
-             <Gallery dataLoading={isLoading} images={photos} />
+            <Gallery
+                dataLoading={isLoading} 
+                images={photos} 
+                title={title}
+            />
         </Container>
     )
 }

@@ -47,7 +47,7 @@ function App() {
       </Container>
       <Routes>
         <Route path="galleries" element={<GalleriesPage />} />
-        <Route path="gallery/:galleryId" element={<GalleryPage />} />
+        <Route path="gallery/:galleryId/:index" element={<GalleryPage categories={galleries} />} />
         <Route path='*' element={<Navigate to={"/galleries"} replace />} />
       </Routes>
     </BrowserRouter>

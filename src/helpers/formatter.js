@@ -1,9 +1,9 @@
 
 
-const mapGalleryData = (gallery) => {
+const mapGalleryData = (gallery, index) => {
     return {
         name : gallery.title._content,
-        route : `/gallery/${gallery.gallery_id}`
+        route : `/gallery/${gallery.gallery_id}/${index}`
     }
 }
 
@@ -15,7 +15,7 @@ const mapPhotoData = (photo) => {
 }
 
 export const formatGalleryData = (data) => {
-    return data.galleries.gallery.map((gallery) => mapGalleryData(gallery));
+    return data.galleries.gallery.map((gallery, index) => mapGalleryData(gallery, index));
 }
 
 export const formatPhotoData = (data) => {
